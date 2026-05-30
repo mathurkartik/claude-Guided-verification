@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { AlertCircle, HelpCircle, Plus, Paperclip, Mic } from 'lucide-react'
+import { AlertCircle, HelpCircle, Plus, Paperclip, Mic, Folder } from 'lucide-react'
 
 const SCENARIOS = [
   {
@@ -99,11 +99,10 @@ export default function Page() {
                 setSelectedScenario(s.id)
                 setShowFrameFollowUp(false)
               }}
-              className={`w-full text-left px-4 py-3 text-sm transition-colors border-l-2 ${
-                selectedScenario === s.id
-                  ? 'bg-sidebar-accent border-l-sidebar-primary text-foreground'
-                  : 'border-l-transparent text-muted-foreground hover:bg-sidebar-accent/50'
-              }`}
+              className={`w-full text-left px-4 py-3 text-sm transition-colors border-l-2 ${selectedScenario === s.id
+                ? 'bg-sidebar-accent border-l-sidebar-primary text-foreground'
+                : 'border-l-transparent text-muted-foreground hover:bg-sidebar-accent/50'
+                }`}
             >
               {s.name}
             </button>
@@ -116,7 +115,7 @@ export default function Page() {
         {/* HEADER */}
         <header className="border-b border-border px-6 py-4">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center justify-center w-6 h-6 rounded text-white text-xs font-bold" style={{backgroundColor: '#D4845A'}}>
+            <span className="inline-flex items-center justify-center w-6 h-6 rounded text-white text-xs font-bold" style={{ backgroundColor: '#D4845A' }}>
               A
             </span>
             <h1 className="text-lg font-semibold">Claude</h1>
@@ -137,7 +136,7 @@ export default function Page() {
             <div className="flex gap-4 mb-8">
               {/* Avatar */}
               <div className="flex-shrink-0">
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded text-white text-xs font-bold" style={{backgroundColor: '#D4845A'}}>
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded text-white text-xs font-bold" style={{ backgroundColor: '#D4845A' }}>
                   A
                 </span>
               </div>
@@ -212,167 +211,177 @@ export default function Page() {
                   </>
                 )}
 
-                {/* Disclaimer */}
-                <p className="text-xs text-muted-foreground">
-                  Claude can make mistakes. Please double-check responses.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* INPUT BAR */}
-        <div className="border-t border-border px-6 py-4 bg-background/50">
-          <div className="max-w-3xl mx-auto flex gap-3 items-center">
-            {/* Input field */}
-            <div className="flex-1 flex gap-2 bg-input rounded-2xl px-4 py-3 items-center">
-              <button className="text-muted-foreground hover:text-foreground transition flex-shrink-0" aria-label="Add">
-                <Plus className="w-5 h-5" />
-              </button>
+        <div className="border-t border-border px-6 py-6 bg-background/50">
+          <div className="max-w-3xl mx-auto flex flex-col items-center">
+            {/* Input container */}
+            <div className="w-full bg-[#1e1e1e] border border-border/40 rounded-3xl p-4 flex flex-col gap-6 shadow-lg">
+              {/* Top input field */}
               <input
                 type="text"
                 placeholder="Write a message…"
                 disabled
-                className="flex-1 bg-transparent outline-none text-foreground placeholder-muted-foreground disabled:opacity-60"
+                className="w-full bg-transparent outline-none text-foreground placeholder-muted-foreground/60 disabled:opacity-60 text-base px-1"
               />
-              <button className="text-muted-foreground hover:text-foreground transition flex-shrink-0" aria-label="Attach file">
-                <Paperclip className="w-5 h-5" />
-              </button>
-            </div>
 
-            {/* Mic button */}
-            <button className="text-muted-foreground hover:text-foreground transition flex-shrink-0" aria-label="Voice input">
-              <Mic className="w-5 h-5" />
-            </button>
+              {/* Bottom controls row */}
+              <div className="flex justify-between items-center px-1">
+                {/* Left side actions */}
+                <div className="flex items-center gap-3">
+                  <button className="text-muted-foreground hover:text-foreground transition p-1" aria-label="Add">
+                    <Plus className="w-5 h-5" />
+                  </button>
+                  <button className="bg-[#24262a] text-[#4d82d6] hover:bg-[#2c2f35] transition p-2 rounded-xl border border-[#2b303b]" aria-label="Projects">
+                    <Folder className="w-4 h-4" />
+                  </button>
+                </div>
 
-            {/* Model picker button */}
-            <div className="relative flex-shrink-0">
-              <button
-                onClick={() => setShowModelPicker(!showModelPicker)}
-                className="text-xs text-muted-foreground hover:text-foreground transition px-3 py-2 rounded border border-border hover:bg-secondary whitespace-nowrap"
-              >
-                Opus 4.6  Medium ∨
-              </button>
+                {/* Right side actions */}
+                <div className="flex items-center gap-4">
+                  {/* Model picker */}
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowModelPicker(!showModelPicker)}
+                      className="text-sm text-muted-foreground hover:text-foreground transition flex items-center gap-1 font-medium"
+                    >
+                      Opus 4.8 <span className="text-xs text-muted-foreground/60 font-light">Max</span> <span>∨</span>
+                    </button>
 
-              {/* Model picker dropdown */}
-              {showModelPicker && (
-                <div className="absolute bottom-full right-0 mb-2 w-56 bg-secondary border border-border rounded-lg shadow-lg z-50">
-                  {/* Opus 4.6 */}
-                  <div className="px-4 py-3 text-sm text-foreground border-b border-border flex items-center justify-between hover:bg-secondary/80">
-                    Opus 4.6
-                    <span className="text-blue-400">✓</span>
+                    {/* Model picker dropdown */}
+                    {showModelPicker && (
+                      <div className="absolute bottom-full right-0 mb-3 w-56 bg-secondary border border-border rounded-lg shadow-lg z-50">
+                        {/* Opus 4.6 */}
+                        <div className="px-4 py-3 text-sm text-foreground border-b border-border flex items-center justify-between hover:bg-secondary/80">
+                          Opus 4.6
+                          <span className="text-blue-400">✓</span>
+                        </div>
+
+                        {/* Effort */}
+                        <button
+                          onClick={() => setActiveSubmenu(activeSubmenu === 'effort' ? null : 'effort')}
+                          className="w-full text-left px-4 py-3 text-sm text-foreground border-b border-border flex items-center justify-between hover:bg-secondary/80 transition"
+                        >
+                          Effort
+                          <span className="text-muted-foreground text-xs">Medium &gt;</span>
+                        </button>
+
+                        {/* Effort submenu */}
+                        {activeSubmenu === 'effort' && (
+                          <div className="absolute bottom-0 right-full mr-2 w-48 bg-secondary border border-border rounded-lg shadow-lg z-50">
+                            <div className="p-3 border-b border-border">
+                              <p className="text-xs text-muted-foreground">
+                                Higher effort means more thorough responses, but takes longer and uses your limits faster.
+                              </p>
+                            </div>
+                            <div className="py-2">
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Low</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between">
+                                Medium <span className="text-muted-foreground text-xs bg-border px-1.5 py-0.5 rounded">Default</span> <span className="text-blue-400">✓</span>
+                              </div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">High</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Max</div>
+                            </div>
+                            <div className="px-3 py-2 border-t border-border text-xs text-foreground flex items-center justify-between">
+                              <span>Extended</span>
+                              <button
+                                onClick={() => setIsExtendedOn(!isExtendedOn)}
+                                className="relative w-4 h-4 rounded border border-border bg-input flex items-center justify-center hover:bg-secondary transition"
+                              >
+                                {isExtendedOn && <span className="text-primary text-xs">✓</span>}
+                              </button>
+                            </div>
+                            <div className="px-3 py-2 text-xs text-muted-foreground">
+                              Always uses deep reasoning
+                            </div>
+                          </div>
+                        )}
+
+                        {/* More models */}
+                        <button
+                          onClick={() => setActiveSubmenu(activeSubmenu === 'models' ? null : 'models')}
+                          className="w-full text-left px-4 py-3 text-sm text-foreground border-b border-border flex items-center justify-between hover:bg-secondary/80 transition"
+                        >
+                          More models
+                          <span className="text-muted-foreground text-xs">&gt;</span>
+                        </button>
+
+                        {/* More models submenu */}
+                        {activeSubmenu === 'models' && (
+                          <div className="absolute bottom-0 right-full mr-2 w-40 bg-secondary border border-border rounded-lg shadow-lg z-50">
+                            <div className="py-2">
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.8</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Sonnet 4.6</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Haiku 4.5</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.7</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 3</div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Verification */}
+                        <button
+                          onClick={() => setActiveSubmenu(activeSubmenu === 'verification' ? null : 'verification')}
+                          className="w-full text-left px-4 py-3 text-sm text-foreground flex items-center justify-between hover:bg-secondary/80 transition"
+                        >
+                          Verification
+                          <span className="text-muted-foreground text-xs">&gt;</span>
+                        </button>
+
+                        {/* Verification submenu */}
+                        {activeSubmenu === 'verification' && (
+                          <div className="absolute bottom-0 right-full mr-2 w-56 bg-secondary border border-border rounded-lg shadow-lg z-[60]">
+                            <div className="p-3 border-b border-border">
+                              <p className="text-xs text-muted-foreground">
+                                Shows which claims in the response are structurally load-bearing, so you can focus your review on what matters most.
+                              </p>
+                            </div>
+                            <div className="py-2">
+                              <button
+                                onClick={() => setIsVerificationOn(false)}
+                                className="w-full text-left px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between"
+                              >
+                                Off
+                                {!isVerificationOn && <span className="text-blue-400">✓</span>}
+                              </button>
+                              <button
+                                onClick={() => setIsVerificationOn(true)}
+                                className="w-full text-left px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between"
+                              >
+                                On
+                                {isVerificationOn && <span className="text-blue-400">✓</span>}
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
-                  {/* Effort */}
-                  <button
-                    onClick={() => setActiveSubmenu(activeSubmenu === 'effort' ? null : 'effort')}
-                    className="w-full text-left px-4 py-3 text-sm text-foreground border-b border-border flex items-center justify-between hover:bg-secondary/80 transition"
-                  >
-                    Effort
-                    <span className="text-muted-foreground text-xs">Medium &gt;</span>
+                  {/* Microphone */}
+                  <button className="text-muted-foreground hover:text-foreground transition p-1" aria-label="Voice input">
+                    <Mic className="w-4 h-4" />
                   </button>
 
-                  {/* Effort submenu */}
-                  {activeSubmenu === 'effort' && (
-                    <div className="absolute bottom-0 right-full mr-2 w-48 bg-secondary border border-border rounded-lg shadow-lg z-50">
-                      <div className="p-3 border-b border-border">
-                        <p className="text-xs text-muted-foreground">
-                          Higher effort means more thorough responses, but takes longer and uses your limits faster.
-                        </p>
-                      </div>
-                      <div className="py-2">
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Low</div>
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between">
-                          Medium <span className="text-muted-foreground text-xs bg-border px-1.5 py-0.5 rounded">Default</span> <span className="text-blue-400">✓</span>
-                        </div>
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">High</div>
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Max</div>
-                      </div>
-                      <div className="px-3 py-2 border-t border-border text-xs text-foreground flex items-center justify-between">
-                        <span>Extended</span>
-                        <button
-                          onClick={() => setIsExtendedOn(!isExtendedOn)}
-                          className="relative w-4 h-4 rounded border border-border bg-input flex items-center justify-center hover:bg-secondary transition"
-                        >
-                          {isExtendedOn && <span className="text-primary text-xs">✓</span>}
-                        </button>
-                      </div>
-                      <div className="px-3 py-2 text-xs text-muted-foreground">
-                        Always uses deep reasoning
-                      </div>
-                    </div>
-                  )}
-
-                  {/* More models */}
-                  <button
-                    onClick={() => setActiveSubmenu(activeSubmenu === 'models' ? null : 'models')}
-                    className="w-full text-left px-4 py-3 text-sm text-foreground border-b border-border flex items-center justify-between hover:bg-secondary/80 transition"
-                  >
-                    More models
-                    <span className="text-muted-foreground text-xs">&gt;</span>
+                  {/* Audio Waveform icon */}
+                  <button className="text-muted-foreground hover:text-foreground transition p-1 flex items-center justify-center" aria-label="Audio waveform">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 10v4" />
+                      <path d="M6 6v12" />
+                      <path d="M9 3v18" />
+                      <path d="M12 7v10" />
+                      <path d="M15 5v14" />
+                      <path d="M18 8v8" />
+                      <path d="M21 11v2" />
+                    </svg>
                   </button>
-
-                  {/* More models submenu */}
-                  {activeSubmenu === 'models' && (
-                    <div className="absolute bottom-0 right-full mr-2 w-40 bg-secondary border border-border rounded-lg shadow-lg z-50">
-                      <div className="py-2">
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.8</div>
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Sonnet 4.6</div>
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Haiku 4.5</div>
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.7</div>
-                        <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 3</div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Verification */}
-                  <button
-                    onClick={() => setActiveSubmenu(activeSubmenu === 'verification' ? null : 'verification')}
-                    className="w-full text-left px-4 py-3 text-sm text-foreground flex items-center justify-between hover:bg-secondary/80 transition"
-                  >
-                    Verification
-                    <span className="text-muted-foreground text-xs">&gt;</span>
-                  </button>
-
-                  {/* Verification submenu */}
-                  {activeSubmenu === 'verification' && (
-                    <div className="absolute bottom-0 right-full mr-2 w-56 bg-secondary border border-border rounded-lg shadow-lg z-[60]">
-                      <div className="p-3 border-b border-border">
-                        <p className="text-xs text-muted-foreground">
-                          Shows which claims in the response are structurally load-bearing, so you can focus your review on what matters most.
-                        </p>
-                      </div>
-                      <div className="py-2">
-                        <button
-                          onClick={() => setIsVerificationOn(false)}
-                          className="w-full text-left px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between"
-                        >
-                          Off
-                          {!isVerificationOn && <span className="text-blue-400">✓</span>}
-                        </button>
-                        <button
-                          onClick={() => setIsVerificationOn(true)}
-                          className="w-full text-left px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between"
-                        >
-                          On
-                          {isVerificationOn && <span className="text-blue-400">✓</span>}
-                        </button>
-                      </div>
-                    </div>
-                  )}
                 </div>
-              )}
+              </div>
             </div>
 
-            {/* Send button */}
-            <button
-              disabled
-              className="rounded-full p-2 disabled:opacity-60 transition flex-shrink-0 text-white"
-              style={{backgroundColor: '#D4845A'}}
-              aria-label="Send message"
-            >
-              <span className="text-lg">↑</span>
-            </button>
+            {/* Disclaimer */}
+            <p className="text-xs text-muted-foreground/80 mt-3 text-center">
+              Claude is AI and can make mistakes. Please double-check responses.
+            </p>
           </div>
         </div>
 
