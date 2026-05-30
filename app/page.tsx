@@ -379,7 +379,7 @@ export default function Page() {
         {/* FOOTER */}
         <div className="border-t border-border px-6 py-4 bg-background/30">
           <p className="text-xs text-muted-foreground text-center">
-            Concept prototype. Dependency mapping is structural, not a truth judgment. Built for NextLeap PM Fellowship graduation project.
+            Concept prototype. Dependency mapping is structural, not a truth judgment.
           </p>
         </div>
       </div>
