@@ -8,7 +8,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Claude — Guided Verification Panel',
-  description: 'Concept prototype for NextLeap PM Fellowship',
+  description: 'Concept prototype for guided verification panel',
   icons: {
     icon: [
       {

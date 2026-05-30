@@ -210,6 +210,10 @@ export default function Page() {
                     <div className="border-t border-border my-4"></div>
                   </>
                 )}
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* INPUT BAR */}
         <div className="border-t border-border px-6 py-6 bg-background/50">
@@ -377,7 +381,6 @@ export default function Page() {
                 </div>
               </div>
             </div>
-
             {/* Disclaimer */}
             <p className="text-xs text-muted-foreground/80 mt-3 text-center">
               Claude is AI and can make mistakes. Please double-check responses.
