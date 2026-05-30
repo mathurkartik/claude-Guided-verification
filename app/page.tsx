@@ -248,7 +248,7 @@ export default function Page() {
                       onClick={() => setShowModelPicker(!showModelPicker)}
                       className="text-sm text-muted-foreground hover:text-foreground transition flex items-center gap-1 font-medium"
                     >
-                      Opus 4.8 <span className="text-xs text-muted-foreground/60 font-light">Max</span> <span>∨</span>
+                      Opus 4.7 <span className="text-xs text-muted-foreground/60 font-light">Max</span> <span>∨</span>
                     </button>
 
                     {/* Model picker dropdown */}
@@ -313,10 +313,10 @@ export default function Page() {
                         {activeSubmenu === 'models' && (
                           <div className="absolute bottom-0 right-full mr-2 w-40 bg-secondary border border-border rounded-lg shadow-lg z-50">
                             <div className="py-2">
-                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.8</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.7</div>
                               <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Sonnet 4.6</div>
                               <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Haiku 4.5</div>
-                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.7</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 4.8</div>
                               <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Opus 3</div>
                             </div>
                           </div>
