@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Claude — Guided Verification Panel',
+  title: 'Claude Guided Verification Panel',
   description: 'Concept prototype for guided verification panel',
   icons: {
     icon: [
