@@ -266,9 +266,9 @@ export default function Page() {
                           className="w-full text-left px-4 py-3 text-sm text-foreground border-b border-border flex items-center justify-between hover:bg-secondary/80 transition"
                         >
                           Effort
-                          <span className="text-muted-foreground text-xs">Medium &gt;</span>
+                          <span className="text-muted-foreground text-xs">Max &gt;</span>
                         </button>
-
+ 
                         {/* Effort submenu */}
                         {activeSubmenu === 'effort' && (
                           <div className="absolute bottom-0 right-full mr-2 w-48 bg-secondary border border-border rounded-lg shadow-lg z-50">
@@ -279,11 +279,11 @@ export default function Page() {
                             </div>
                             <div className="py-2">
                               <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Low</div>
-                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between">
-                                Medium <span className="text-muted-foreground text-xs bg-border px-1.5 py-0.5 rounded">Default</span> <span className="text-blue-400">✓</span>
-                              </div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Medium</div>
                               <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">High</div>
-                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80">Max</div>
+                              <div className="px-4 py-2 text-xs text-foreground hover:bg-secondary/80 flex items-center justify-between">
+                                Max <span className="text-muted-foreground text-xs bg-border px-1.5 py-0.5 rounded">Default</span> <span className="text-blue-400">✓</span>
+                              </div>
                             </div>
                             <div className="px-3 py-2 border-t border-border text-xs text-foreground flex items-center justify-between">
                               <span>Extended</span>

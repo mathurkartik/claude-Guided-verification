@@ -117,7 +117,7 @@ Dialogue Box (Model Picker Dropdown & Verification Submenus):
 - Clicking the "Opus 4.7 Max ∨" button opens an absolute-positioned dropdown menu dialogue box (bg-secondary, border, rounded-lg, shadow-lg, z-50) floating directly above the button (using `bottom-full right-0 mb-3 w-56`).
 - The main dropdown contains these menu items:
   1. "Opus 4.6" displaying a checkmark.
-  2. "Effort (Medium >)": Clicking this slides out a nested side submenu with options: "Low", "Medium (Default ✓)", "High", and "Max".
+  2. "Effort (Max >)": Clicking this slides out a nested side submenu with options: "Low", "Medium", "High", and "Max (Default ✓)".
   3. "Verification ( >)": Clicking this opens a nested side submenu with options to toggle the verification states: "Off" and "On" (each displaying a blue checkmark when active).
 - Clicking the "On" or "Off" option in the Verification submenu triggers the state of the right-hand panel (rendering/hiding it along with the keystone highlights in the Claude prose).
 ```
