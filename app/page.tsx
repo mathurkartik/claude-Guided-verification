@@ -416,7 +416,7 @@ export default function Page() {
                       onClick={() => setShowModelPicker(!showModelPicker)}
                       className="text-sm text-muted-foreground hover:text-foreground transition flex items-center gap-1 font-medium"
                     >
-                      Opus 4.7 <span className="text-xs text-muted-foreground/60 font-light">Max</span> <span>∨</span>
+                      Opus 4.6 <span className="text-xs text-muted-foreground/60 font-light">Max</span> <span>∨</span>
                     </button>
 
                     {/* Model picker dropdown */}
