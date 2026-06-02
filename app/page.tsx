@@ -171,6 +171,8 @@ export default function Page() {
           <button
             onClick={() => {
               setIsLiveMode(true)
+              setLiveAnswer(null)
+              setUserInput('')
               setShowFrameFollowUp(false)
               setErrorMessage(null)
             }}
