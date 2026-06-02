@@ -91,6 +91,7 @@ export default function Page() {
     const trimmed = userInput.trim()
     if (!trimmed || isLoading) return
 
+    setIsLiveMode(true)
     setIsLoading(true)
     setErrorMessage(null)
     setLiveAnswer(null)
@@ -202,6 +203,7 @@ export default function Page() {
                 setSelectedScenario(s.id)
                 setShowFrameFollowUp(false)
                 setErrorMessage(null)
+                setUserInput('')
               }}
               className={`w-full text-left px-4 py-3 text-sm transition-colors border-l-2 ${!isLiveMode && selectedScenario === s.id
                 ? 'bg-sidebar-accent border-l-sidebar-primary text-foreground'
@@ -388,10 +390,10 @@ export default function Page() {
               <input
                 type="text"
                 placeholder={isLiveMode ? 'Ask anything…' : 'Write a message…'}
-                disabled={!isLiveMode}
-                value={isLiveMode ? userInput : ''}
+                disabled={isLoading}
+                value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                className={`w-full bg-transparent outline-none text-foreground placeholder-muted-foreground/60 text-base px-1 ${!isLiveMode ? 'disabled:opacity-60' : ''}`}
+                className="w-full bg-transparent outline-none text-foreground placeholder-muted-foreground/60 text-base px-1"
               />
 
               {/* Bottom controls row */}
@@ -532,8 +534,8 @@ export default function Page() {
                     <Mic className="w-4 h-4" />
                   </button>
 
-                  {/* Send button (live mode) or Audio Waveform (demo mode) */}
-                  {isLiveMode ? (
+                  {/* Send button (when there is text or loading) or Audio Waveform (when empty) */}
+                  {userInput.trim() || isLoading ? (
                     <button
                       type="submit"
                       disabled={!userInput.trim() || isLoading}
