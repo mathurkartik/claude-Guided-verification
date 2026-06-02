@@ -56,35 +56,29 @@ export async function POST(req: NextRequest) {
         {
           role: 'system',
           content: `You are a structural dependency analyzer. Given an AI-generated answer, identify the single most load-bearing claim (the "keystone claim") that other conclusions in the answer depend on.
+IMPORTANT: Before identifying a keystone, assess whether the user provided enough context for the answer to be grounded. If the user gave no budget, no constraints, no specifics, and the model invented most of the context (guessed preferences, assumed use case, filled in numbers the user never gave), then the answer is UNDERSPECIFIED. In this case:
 
-Return ONLY valid JSON in this exact format, with no other text:
-{
-  "keystoneClaim": "The exact keystone claim sentence from the answer",
-  "downstreamCount": <number of conclusions that depend on this claim>,
-  "frameCheck": "A question that asks the user whether the key assumption behind this claim actually matches their situation. Start with 'This answer is built on the assumption that...' and end with 'Does it?'",
-  "highlightText": "The exact substring from the answer to highlight (lowercase, should be a key phrase from the keystone claim, 5-15 words)",
-  "isNullState": false
-}
+Set keystoneClaim to the most critical assumption the model invented
+Set frameCheck to: "This answer fills in details you didn't provide. It assumes [list the 2-3 biggest assumptions the model made]. Before trusting any specific recommendation, consider whether these assumptions match your situation."
+Set downstreamCount to the number of recommendations that depend on those invented assumptions
+Set highlightText to empty string (do not highlight — the whole answer is assumption-dependent, not just one phrase)
+Set isNullState to false
 
-If the question is trivially low-stakes (e.g. brainstorming, creative lists, casual questions with no real consequences), return:
-{
-  "keystoneClaim": "",
-  "downstreamCount": 0,
-  "frameCheck": "",
-  "highlightText": "",
-  "isNullState": true
-}
-
+For genuinely low-stakes questions (brainstorming, creative lists, greetings), set isNullState to true.
+For well-specified questions where the user DID provide context and the answer builds real conclusions on specific claims, identify the keystone normally.
+Return ONLY valid JSON in this exact format:
+{ "keystoneClaim": "...", "downstreamCount": number, "frameCheck": "...", "highlightText": "...", "isNullState": boolean }
 Rules:
-- keystoneClaim must be an EXACT sentence or clause from the answer
-- highlightText must be an EXACT substring from the answer (case-insensitive match will be used)
-- highlightText should be the most critical phrase, not the full sentence
-- frameCheck should help the user decide if the answer applies to their specific situation
-- downstreamCount should reflect how many other conclusions logically depend on the keystone claim`,
+
+keystoneClaim must be an EXACT sentence or clause from the answer (unless the answer is UNDERSPECIFIED, in which case set it to the most critical assumption the model invented)
+highlightText must be an EXACT substring from the answer, or empty string if the answer is underspecified
+highlightText should be the most critical phrase, not the full sentence
+frameCheck should help the user decide if the answer applies to their specific situation
+downstreamCount should reflect how many other conclusions logically depend on the keystone claim`,
         },
         {
           role: 'user',
-          content: `Analyze this answer:\n\n"${answer}"`,
+          content: `User query: "${message}"\n\nAI-generated answer:\n"${answer}"`,
         },
       ],
       temperature: 0.3,
