@@ -564,7 +564,7 @@ export default function Page() {
             </form>
             {/* Disclaimer */}
             <p className="text-xs text-muted-foreground/80 mt-3 text-center">
-              {isLiveMode ? 'Powered by Groq + Llama 3.3. AI-generated responses may be inaccurate.' : 'Claude is AI and can make mistakes. Please double-check responses.'}
+              Claude is AI and can make mistakes. Please double-check responses.
             </p>
           </div>
         </div>
